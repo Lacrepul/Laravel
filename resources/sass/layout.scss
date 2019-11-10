@@ -1,0 +1,26 @@
+#header{
+    text-align:center;
+    font-family: 'Liu Jian Mao Cao', cursive; 
+    font-size:80px; 
+    color:grey;
+}
+#footer{
+    position: fixed; 
+    left: 0; 
+    bottom: 0; 
+    width: 100%;
+    text-align:center;
+}
+#logoutButt{
+    position:fixed; 
+    width:100px;
+}
+#profileButt{
+    position:fixed;
+    right:0;
+    width:100px;
+}
+#container{
+    width:300px;
+    margin-top:3%;
+}

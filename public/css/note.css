@@ -1,0 +1,13 @@
+#createNewNote {
+  width: 90%;
+}
+
+.list-group-item {
+  width: 400px;
+}
+
+#textAreaId {
+  height: 210px;
+  width: 635px;
+}
+
