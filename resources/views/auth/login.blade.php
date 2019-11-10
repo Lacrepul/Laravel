@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<a href="/en">English</a>
+<a href="/en">English(dont work!)</a>
 	</style>
 	<div id="container" class="container">
 
