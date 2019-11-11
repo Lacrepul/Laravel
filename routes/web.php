@@ -13,18 +13,17 @@ use App\Product;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::redirect('/', '/en');
 Auth::routes();
+Route::group(['prefix' => '{language}'], function (){
+    
+    Route::resource('products','ProductController');
 
-Route::get('/', 'GeneralController@showLogin');
-Route::get('/profile', 'GeneralController@showProfile');
-Route::get('{products}/profile', 'GeneralController@showProfile');
+    Route::get('/', 'GeneralController@showLogin');
+    Route::get('/profile', 'GeneralController@showProfile');
+    Route::get('{products}/profile', 'GeneralController@showProfile');
 
-Route::resource('products','ProductController');
-
-Route::post('/update', 'GeneralController@doUpdate');
-
-//не работает!!!
-Route::get('/{locale}', function ($locale) {
-    Lang::setLocale($locale);
-    return view('en');
+    Route::post('/update', 'GeneralController@doUpdate');
 });

@@ -9,16 +9,16 @@
 @section('content')
 	<div class="container" id="container">
 
-		<form action="/" method="GET">
+		<form action="{{ route('login', app()->getLocale()) }}" method="GET">
 			<button class="btn btn-outline-info" type="submit">
-				Back
+				{{__('changeLang.Back')}}
 			</button>
 		</form>
 
-		<form action="{{ route('register')}}" method="POST" id="signInId">
+		<form action="{{ route('register', app()->getLocale()) }}" method="POST" id="signInId">
 			@csrf
 			<div class="form-group">
-				<input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="Username" name="name">
+				<input class="form-control @error('name') is-invalid @enderror" type="text" placeholder="{{ __('changeLang.Username') }}" name="name">
 				
 				@error('name')
                     <span class="invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
 			</div>
 
 			<div class="form-group">
-				<input class="form-control @error('password') is-invalid @enderror" type="password" placeholder="Password" name="password">
+				<input class="form-control @error('password') is-invalid @enderror" type="password" placeholder="{{ __('changeLang.Password') }}" name="password">
 				
 				@error('password')
                     <span class="invalid-feedback" role="alert">
@@ -40,11 +40,11 @@
 			</div>
 
 			<div class="form-group">
-				<input class="form-control" type="password" placeholder="Confirm Password" name="password_confirmation">
+				<input class="form-control" type="password" placeholder="{{ __('changeLang.ConfirmPassword') }}" name="password_confirmation">
 			</div>
 			
 			<div class="form-group">
-				<input class="form-control @error('email') is-invalid @enderror" type="text" placeholder="Email" name="email">
+				<input class="form-control @error('email') is-invalid @enderror" type="text" placeholder="{{ __('changeLang.Email') }}" name="email">
 				
 				@error('email')
                     <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
 				
 			</div>
 				<button class="btn btn-outline-success" type="submit">
-					Registration
+					{{ __('changeLang.Register') }}
 				</button>
 		</form>
 	</div>

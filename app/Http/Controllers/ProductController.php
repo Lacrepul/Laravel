@@ -51,49 +51,7 @@ class ProductController extends Controller
    
         return redirect()->route('products.index')
                         ->with('success','Product created successfully.');
-    }
-   
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        return view('products.show',compact('product'));
-    }
-   
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        return view('products.edit',compact('product'));
-    }
-  
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        $request->validate([
-            'name' => 'required',
-            'detail' => 'required',
-        ]);
-  
-        $product->update($request->all());
-  
-        return redirect()->route('products.index')
-                        ->with('success','Product updated successfully');
-    }
+    } 
   
     /**
      * Remove the specified resource from storage.

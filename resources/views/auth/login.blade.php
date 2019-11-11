@@ -7,18 +7,27 @@
 @endsection
 
 @section('content')
-<a href="/en">English(dont work!)</a>
+<a href="/en">English</a>
+<a href="/ru">Russian</a>
+
+	<form action="{{route('logout', app()->getLocale())}}" method="POST">
+        @csrf
+		<button type="submit" class="btn btn-outline-info" style="position:fixed; width:100px;">
+			Logout
+		</button>
+    </form>
+	
 	</style>
 	<div id="container" class="container">
 
-		<form action="register">
-			<button type="submit" class="btn btn-outline-success">Register</button>
+		<form action="{{ route('register', app()->getLocale()) }}">
+			<button type="submit" class="btn btn-outline-success">{{__('changeLang.Register')}}</button>
 		</form>
 
-		<form action="{{ route('login') }}" style="margin-top:15px;" method="POST">
+		<form action="{{ route('login', app()->getLocale()) }}" style="margin-top:15px;" method="POST">
 			@csrf
 			<div class="form-group">
-				<input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email">
+				<input type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="{{__('changeLang.Email')}}">
 				
 				@error('email')
                     <span class="invalid-feedback" role="alert">
@@ -29,7 +38,7 @@
 			</div>
 
 			<div class="form-group">
-				<input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password">
+				<input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="{{__('changeLang.Password')}}">
 				
 				@error('password')
                     <span class="invalid-feedback" role="alert">
@@ -38,7 +47,7 @@
                 @enderror
 				
 			</div>
-			<button type="submit" class="btn btn-outline-success">Login</button>
+			<button type="submit" class="btn btn-outline-success">{{__('changeLang.Login')}}</button>
 		</form>
 	</div>
 @endsection
