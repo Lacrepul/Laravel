@@ -1,7 +1,7 @@
 @extends('products.layout')
 
 @section('logout')
-    <form action="{{route('logout')}}" method="POST">
+    <form action="{{route('logout', app()->getLocale())}}" method="POST">
         @csrf
         <button type="submit" class="btn btn-outline-info" style="position:fixed; width:100px;">
             Logout
@@ -24,104 +24,67 @@
 @endsection
 
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('products.create') }}"> Create New Product</a>
-            </div>
+{{__('changeLang.Register')}}
+
+<div class="row">
+            <div class="col-5" >
+                <a class="btn btn-info btn-block" id="createNewNote" href="{{ route('products.create, app()->getLocale()) }}"> Create New Note</a>
+                    <ul class="list-group">
+                        @foreach ($products as $product)
+                            @if (Auth::user()->name == $product->nameUser)
+                                <li class="list-group-item" id="listGroupItem">
+                                    
+                                    <input type="text" class="btn btn-outline-secondary" disabled style="width:10%" id="inputNumberId{{$i}}" name="inputNumberName" value="{{$i}}" readonly>
+                                    <input type="text" class="btn btn-outline-secondary" disabled style="width:88%" id="inputNameId{{$i}}" name="inputNameName" value="{{ $product->name }}" readonly>
+                                    <input type="hidden" id="inputDetailId{{$i}}" name="inputDetailName" value="{{ $product->detail }}" readonly>
+                                    
+                                    <button class="btn btn-secondary" type="button" id="buttonId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName2">Show</button>
+                                    <button type="button" class="btn btn-secondary" id="buttonEditId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName">Edit</button>
+                                    <form action="{{ route('products.destroy',$product->id) }}" style="display: inline" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-secondary" style="width: 32%;margin-top:5px;">Delete</button>
+                                    </form>
+                                    <!--                                      -->
+                                    <input type="hidden" id="inputHiddenForId{{$i}}" value="{{$product->id}}" readonly>
+                                    <!--      Нельзя спрятать JS в отдельный файл, так как используется blade                                -->
+                                    
+                                    <script>
+                                        buttonId{{$i}}.onclick = showButt;
+                                        buttonEditId{{$i}}.onclick = editButt;
+                                        function showButt(){
+                                            textAreaId.value = inputDetailId{{$i}}.value;
+                                            textAreaId.readOnly = true;
+                                            buttonSaveId.hidden = true;
+                                        }
+
+                                        function editButt(){
+                                            inputSaveIdName.value = inputHiddenForId{{$i}}.value;
+                                            hiddenInput.value = inputNumberId{{$i}}.value;
+                                            textAreaId.value = inputDetailId{{$i++}}.value;
+                                            textAreaId.readOnly = false;
+                                            buttonSaveId.hidden = false;
+                                        }
+                                    </script>
+                                    
+                                </li>    
+                            @endif
+                        @endforeach         
+                    </ul>
+            </div>   
+ 
+<!--  -->
+        <div class="col-7">
+            <ul class="list-group">
+                <div class="btn btn-success btn-block" id="textareaHeader">Your Note</div>
+                    <form id="saveForm" method="POST">
+                        <textarea class = "form-control" name="detail" id="textAreaId" readonly></textarea>
+                        <input type="hidden" id="hiddenInput" name="hiddenInputName" value="">
+                        <input type="hidden" id="inputSaveIdName" name="inputSaveIdName" value="" readonly>
+                    </form>
+                
+                <button hidden class="btn btn-success btn-block" type="button" id="buttonSaveId" name="buttonSaveName">Save</button>
+            </ul>
         </div>
     </div>
-
-
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
-    
-        <table class="table table-bordered">
-            <tr>
-                <th width="5px">No</th>
-                <th width="20px">Name</th>
-                <th width="80px">Action</th>
-            </tr>
-        
-            <?php $user = Auth::user()?>
-
-            @foreach ($products as $product)
-                @if ($user['name'] == $product->nameUser)
-
-                    <tr>
-                    
-                        <form id="productIdForm{{$i}}" name="productNameForm" method="POST">
-
-                            <td><input width="5px" type="text" id="inputNumberId" name="inputNumberName" value="{{$i}}" readonly></td>
-                            <td><input type="text" id="inputNameId" name="inputNameName" value="{{ $product->name }}" readonly></td>
-                            <input type="hidden" id="inputDetailId{{++$i}}" name="inputDetailName" value="{{ $product->detail }}" readonly>
-
-                        </form>
-                        
-                        <td>
-                          
-                            <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                            <button type="button" id="buttonId{{$i}}" name="buttonName2">show</button>
-                            <button type="button" id="buttonEditId{{$i}}" name="buttonName">edit</button>                                
-                            <button type="button" id="buttonSaveId{{$i}}" name="buttonSaveName">save</button>
-
-                            <form id="saveForm{{$i}}" method="POST">
-                                <input type="hidden" name="inputSaveIdName" value="{{$product->id}}" readonly>
-                                <input type="textarea" class = "form-control" style="height:50px" id='editDetailInputId{{$i}}' name='detail'>
-                            </form>
-
-
-
-                            <script>
-                                buttonEditId{{$i}}.onclick = editButt;
-                                function editButt(){
-                                    editDetailInputId{{$i}}.value = inputDetailId{{$i}}.value;
-                                }
-                            </script>
-                            <script>
-                                buttonSaveId{{$i}}.onclick = saveChanges;
-                                async function saveChanges(){
-                                    let response = await fetch('/update', {
-                                    headers : {
-                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content//,
-                                       // 'Content-Type':'application/json',
-                                        //'Accept':'application/json'
-                                    },
-                                    method: 'POST',
-                                    body: new FormData(saveForm{{$i}})
-                                    });
-
-                                    let result = await response.text();
-                                    
-                                    inputDetailId{{$i}}.value = result;
-                                    textId2.innerHTML = inputDetailId{{$i}}.value;
-                                }
-                            </script>
-
-                            <script>
-                                buttonId{{$i}}.onclick = showButt;
-                                function showButt(){
-                                    textId2.innerHTML = inputDetailId{{$i}}.value;
-                                }
-                            </script>
-
-                        </td>
-
-                    </tr>
-                    
-                 @endif
-            @endforeach
-        </table>
-
-    <div id='textId2'></div>
-
-    {!! $products->links() !!}
-      
 @endsection

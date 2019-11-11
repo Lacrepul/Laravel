@@ -16,14 +16,16 @@ use App\Product;
 
 
 Route::redirect('/', '/en');
-Auth::routes();
-Route::group(['prefix' => '{language}'], function (){
-    
-    Route::resource('products','ProductController');
+//Route::delete('delete', 'ProductController@destroy')->name('delete');
+Route::delete('delete', 'GeneralController@destroy')->name('delete');
+Route::resource('destroy', 'DestroyController');
 
+Route::group(['prefix' => '{language}'], function (){
+
+    Route::resource('products','ProductController');
+    Auth::routes();
     Route::get('/', 'GeneralController@showLogin');
     Route::get('/profile', 'GeneralController@showProfile');
-    Route::get('{products}/profile', 'GeneralController@showProfile');
-
-    Route::post('/update', 'GeneralController@doUpdate');
+    //Route::get('{products}/profile', 'GeneralController@showProfile');
+    //Route::post('/update', 'GeneralController@doUpdate');
 });

@@ -1,7 +1,7 @@
 @extends('products.layout')
 
 @section('logout')
-    <form action="{{route('logout')}}" method="POST">
+    <form action="{{route('logout', app()->getLocale())}}" method="POST">
         @csrf
         <button type="submit" class="btn btn-outline-info" id="logoutButt">
             Logout
@@ -31,7 +31,7 @@
             <h2>Add New Note</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-info" href="{{ route('products.index') }}"> Back</a>
+            <a class="btn btn-info" href="{{ route('products.index', app()->getLocale()) }}"> Back</a>
         </div>
     </div>
 </div>
@@ -47,7 +47,7 @@
     </div>
 @endif
    
-<form action="{{ route('products.store') }}" method="POST">
+<form action="{{ route('products.store', app()->getLocale()) }}" method="POST">
     @csrf
 
     <input type="hidden" name="nameUser" class="form-control" value="{{$user['name']}}" placeholder="Name">
