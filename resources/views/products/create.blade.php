@@ -9,14 +9,6 @@
     </form>
 @endsection
 
-@section('profileButt')
-    <form action="profile" method="GET">
-        <button type="submit" class="btn btn-outline-success" id="profileButt">
-            Profile
-        </button>
-    </form>
-@endsection
-
 @section('header')
     <div class="text" id="header">
         NOTEBOOK

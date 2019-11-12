@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App;
 
 class RegisterController extends Controller
 {
@@ -28,7 +29,12 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/products';
+    protected $redirectTo = '/en/products';
+    protected function redirectTo()
+    {
+        $locale = app()->getLocale();
+        return $locale.'/products';
+    }
 
     /**
      * Create a new controller instance.

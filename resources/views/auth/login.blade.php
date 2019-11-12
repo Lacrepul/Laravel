@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+{{(app()->getLocale())}}
 <a href="/en">English</a>
 <a href="/ru">Russian</a>
 

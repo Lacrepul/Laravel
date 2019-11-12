@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use Auth;
+use App;
 
 class DestroyController extends Controller
 {
@@ -19,6 +20,7 @@ class DestroyController extends Controller
     public function destroy($product)
     {
         Product::destroy($product);
-        return redirect()->route('products.index', "en");
+        echo $product;
+        //return redirect($locale.'products');
     }
 }
