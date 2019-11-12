@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use App;
 class LoginController extends Controller
 {
 
@@ -27,7 +27,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/en/products'; ///products
+
+    //protected $redirectTo = "/en/products"; ///en/products
+    protected $redirectTo = '/home';
+    protected function redirectTo()
+    {
+        $locale = app()->getLocale();
+        return $locale.'/products';
+    }
 
     /**
      * Create a new controller instance.

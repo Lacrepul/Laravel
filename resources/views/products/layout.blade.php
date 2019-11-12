@@ -34,6 +34,7 @@
 
     <div class="alert alert-light" align="bottom" role="alert" id="footer">
 		&copy;Copyright by Poul Vasenev, 2019 
+        
 	</div>
 <div class="container">
     @yield('content')

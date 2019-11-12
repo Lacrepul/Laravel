@@ -2,22 +2,13 @@
 
 @section('header')
     <div id="header" class="text">
-        NOTEBOOK
+        {{__('changeLang.NOTEBOOK')}}
     </div>
 @endsection
 
 @section('content')
-<a href="/en">English</a>
-<a href="/ru">Russian</a>
-
-	<form action="{{route('logout', app()->getLocale())}}" method="POST">
-        @csrf
-		<button type="submit" class="btn btn-outline-info" style="position:fixed; width:100px;">
-			Logout
-		</button>
-    </form>
-	
-	</style>
+<a href="/en"><img src="/icons/EN.png"></a>
+<a href="/ru"><img src="/icons/RU.png"></a>
 	<div id="container" class="container">
 
 		<form action="{{ route('register', app()->getLocale()) }}">

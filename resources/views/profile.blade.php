@@ -4,14 +4,14 @@
     <form action="{{route('logout', app()->getLocale())}}" method="POST">
         @csrf
         <button type="submit" id="logoutButt" class="btn btn-outline-info">
-            Logout
+            {{__('changeLang.Logout')}}
         </button>
     </form>
 @endsection
 
 @section('profileHead')
 	<div class="text" id="header">
-		Your profile
+		{{__('changeLang.YourProfile')}}
 	</div>
 @endsection
 
@@ -19,7 +19,7 @@
 	<div class="container" id="container">
 
 			<div class="pull-right">
-				<a class="btn btn-outline-success" id="back" href="{{ route('products.index', app()->getLocale()) }}"> Back</a>
+				<a class="btn btn-outline-success" id="back" href="{{ route('products.index', app()->getLocale()) }}"> {{__('changeLang.Back')}}</a>
 			</div>
 
 			<div class="form-group" id="username">
@@ -31,7 +31,7 @@
 				<div class="form-group">
 					<input type="email" class="form-control" value="{{$user['email']}}" name="email" placeholder="{{$user['email']}}" readonly>
 				</div>
-			<button type="submit" id="saveId" class="btn btn-outline-success">Change password</button>
+			<button type="submit" id="saveId" class="btn btn-outline-success">{{__('changeLang.ChangePassword')}}</button>
 			</form>		
 
 	</div>

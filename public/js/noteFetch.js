@@ -1,12 +1,12 @@
 var createSaveChanges = [];
 (function (){
-  if (window.location.pathname == '/products'){
+  if ((window.location.pathname == '/en/products') || (window.location.pathname == '/ru/products') ){
   createSaveChanges.saveChanges = saveChanges;
 
     function saveChanges(){
       buttonSaveId.onclick = saveChange;
       async function saveChange(){
-        let response = await fetch('/update', {
+        let response = await fetch('/en/update', {
           headers : {
             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content//,
             //'Content-Type':'application/json',

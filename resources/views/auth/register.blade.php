@@ -2,7 +2,7 @@
 
 @section('header')
     <div id="header" class="text">
-        NOTEBOOK
+        {{__('changeLang.NOTEBOOK')}}
     </div>
 @endsection
 
