@@ -26,7 +26,6 @@
 
 
 @section('content')
-{{(app()->getLocale())}}
         <div class="row">
             <div class="col-5" >
                 <a class="btn btn-info btn-block" id="createNewNote" href="{{ route('products.create', app()->getLocale()) }}"> Create New Note</a>
@@ -40,11 +39,12 @@
                                     
                                     <button class="btn btn-secondary" type="button" id="buttonId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName2">Show</button>
                                     <button type="button" class="btn btn-secondary" id="buttonEditId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName">Edit</button>
-                                    
-                                    <?=  $lang = app()->getLocale() ?>
-                                    <form action="{{ route( 'destroy.destroy', $product->id ) }}" style="display: inline" method="POST">
+
+                                    <!-- Немогу отправить Route с двумя параметрами для удаления, поэтому hidden inputs -->
+                                    <form action="/en/destroy" style="display: inline" method="POST">
                                         @csrf
-                                        @method('DELETE')
+                                        <input type="hidden" name="destroyName" value='{{$product->id}}'>
+                                        <input type="hidden" name="langName" value='{{app()->getLocale()}}'>
                                         <button type="submit" class="btn btn-secondary" style="width: 32%;margin-top:5px;">Delete</button>
                                     </form>
 

@@ -17,10 +17,10 @@ class DestroyController extends Controller
      */
 
     //Почему неработает модель Product $product?
-    public function destroy($product)
+    public function destroy(Request $request)
     {
-        Product::destroy($product);
-        echo $product;
-        //return redirect($locale.'products');
+        echo $request['langName'];
+        Product::destroy($request['destroyName']);
+        return redirect($request['langName'].'/products');
     }
 }

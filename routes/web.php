@@ -15,8 +15,8 @@ use App\Product;
 */
 
 Route::redirect('/', '/ru');
-//Route::delete('delete', 'GeneralController@destroy')->name('delete');
-Route::resource('destroy', 'DestroyController');
+Route::post('/en/destroy', 'DestroyController@destroy')->name('destroy');
+//Route::resource('destroy', 'DestroyController');
 
 Route::group(['prefix' => '{language}'], function (){
     Route::resource('products','ProductController');
