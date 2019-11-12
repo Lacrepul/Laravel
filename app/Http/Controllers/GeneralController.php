@@ -24,5 +24,4 @@ class GeneralController extends Controller
         $updatedStr->save();
         return $request;
     }  
-
 }

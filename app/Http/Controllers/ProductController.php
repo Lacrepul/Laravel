@@ -49,7 +49,7 @@ class ProductController extends Controller
   
         Product::create($request->all());
    
-        return redirect()->route('products.index')
+        return redirect()->route('products.index', app()->getLocale())
                         ->with('success','Product created successfully.');
     } 
   
@@ -59,11 +59,9 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    /*public function destroy(Product $product)
     {
         $product->delete();
-  
-        return redirect()->route('products.index')
-                        ->with('success','Product deleted successfully');
-    }
+        return redirect()->route('products.index', "en");
+    }*/
 }
