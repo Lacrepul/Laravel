@@ -4,7 +4,7 @@
     <form action="{{route('logout', app()->getLocale())}}" method="POST">
         @csrf
         <button type="submit" class="btn btn-outline-info" id="logoutButt">
-            Logout
+        {{ __('changeLang.Logout') }}
         </button>
     </form>
 @endsection
@@ -20,10 +20,10 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
-            <h2>Add New Note</h2>
+            <h2>{{ __('changeLang.AddNewNote') }}</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-info" href="{{ route('products.index', app()->getLocale()) }}"> Back</a>
+            <a class="btn btn-info" href="{{ route('products.index', app()->getLocale()) }}"> {{__('changeLang.Back')}}</a>
         </div>
     </div>
 </div>
@@ -42,22 +42,21 @@
 <form action="{{ route('products.store', app()->getLocale()) }}" method="POST">
     @csrf
 
-    <input type="hidden" name="nameUser" class="form-control" value="{{$user['name']}}" placeholder="Name">
+    <input type="hidden" name="nameUser" class="form-control" value="{{$user['name']}}">
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
+        <br>
             <div class="form-group">
-                <strong>Name:</strong>
-                <input type="text" name="name" class="form-control" placeholder="Name">
+                <input type="text" name="name" class="form-control" placeholder="{{__('changeLang.Name')}}">
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Note:</strong>
-                <textarea class="form-control" style="height:150px" name="detail" placeholder="Your note"></textarea>
+                <textarea class="form-control" style="height:150px" name="detail" placeholder="{{__('changeLang.YourNote')}}"></textarea>
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-info">Submit</button>
+                <button type="submit" class="btn btn-info">{{__('changeLang.Submit')}}</button>
         </div>
     </div>
    

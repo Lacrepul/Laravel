@@ -4,7 +4,7 @@
     <form action="{{route('logout', app()->getLocale())}}" method="POST">
         @csrf
         <button type="submit" class="btn btn-outline-info" id="logoutButt">
-            Logout
+            {{ __('changeLang.Logout') }}
         </button>
     </form>
 @endsection
@@ -12,7 +12,7 @@
 @section('profileButt')
     <form action="profile" method="GET">
         <button type="submit" class="btn btn-outline-success" id="profileButt">
-            Profile
+        {{ __('changeLang.Profile') }}
         </button>
     </form>
 @endsection
@@ -23,12 +23,10 @@
     </div>
 @endsection
 
-
-
 @section('content')
         <div class="row">
             <div class="col-5" >
-                <a class="btn btn-info btn-block" id="createNewNote" href="{{ route('products.create', app()->getLocale()) }}"> Create New Note</a>
+                <a class="btn btn-info btn-block" id="createNewNote" href="{{ route('products.create', app()->getLocale()) }}"> {{ __('changeLang.CreateNewNote') }}</a>
                     <ul class="list-group">
                         @foreach ($products as $product)
                             @if (Auth::user()->name == $product->nameUser)
@@ -37,15 +35,15 @@
                                     <input type="text" class="btn btn-outline-secondary" disabled style="width:88%" id="inputNameId{{$i}}" name="inputNameName" value="{{ $product->name }}" readonly>
                                     <input type="hidden" id="inputDetailId{{$i}}" name="inputDetailName" value="{{ $product->detail }}" readonly>
                                     
-                                    <button class="btn btn-secondary" type="button" id="buttonId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName2">Show</button>
-                                    <button type="button" class="btn btn-secondary" id="buttonEditId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName">Edit</button>
+                                    <button class="btn btn-secondary" type="button" id="buttonId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName2">{{ __('changeLang.Show') }}</button>
+                                    <button type="button" class="btn btn-secondary" id="buttonEditId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName">{{ __('changeLang.Edit') }}</button>
 
                                     <!-- Немогу отправить Route с двумя параметрами для удаления, поэтому hidden inputs -->
                                     <form action="/en/destroy" style="display: inline" method="POST">
                                         @csrf
                                         <input type="hidden" name="destroyName" value='{{$product->id}}'>
                                         <input type="hidden" name="langName" value='{{app()->getLocale()}}'>
-                                        <button type="submit" class="btn btn-secondary" style="width: 32%;margin-top:5px;">Delete</button>
+                                        <button type="submit" class="btn btn-secondary" style="width: 32%;margin-top:5px;">{{ __('changeLang.Delete') }}</button>
                                     </form>
 
                                     <!--                                      -->
@@ -79,7 +77,7 @@
 <!--  -->
         <div class="col-7">
             <ul class="list-group">
-                <div class="btn btn-success btn-block" id="textareaHeader">Your Note</div>
+                <div class="btn btn-success btn-block" id="textareaHeader">{{ __('changeLang.Your Note') }}</div>
                     <form id="saveForm" method="POST">
                         <textarea class = "form-control" name="detail" id="textAreaId" readonly></textarea>
                         <input type="hidden" id="hiddenInput" name="hiddenInputName" value="">
