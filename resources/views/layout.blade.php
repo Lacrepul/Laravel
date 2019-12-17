@@ -13,9 +13,11 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
     <script>
+    if ((window.location.pathname == '/en/products') || (window.location.pathname == '/ru/products') ){
         document.addEventListener("DOMContentLoaded", function () {
             createSaveChanges.saveChanges();
         });
+    }
 </script>
 </head>
 <body>
@@ -34,6 +36,7 @@
 
     <div class="alert alert-light" align="bottom" role="alert" id="footer">
 		&copy;Copyright by Poul Vasenev, 2019 
+        
 	</div>
 <div class="container">
     @yield('content')

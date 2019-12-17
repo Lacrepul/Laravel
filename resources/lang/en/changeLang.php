@@ -23,5 +23,9 @@ return [
 'Name' => 'Name',
 'YourNote' => 'Your Note',
 'Submit' => 'Submit',
+//
+'ChangePassword' => 'Change Password',
+'NOTEBOOK' => 'NOTEBOOK',
+'YourProfile' => 'Your Profile',
 ];
 ?>  

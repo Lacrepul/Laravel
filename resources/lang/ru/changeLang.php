@@ -6,6 +6,7 @@ return [
 'Email' => 'Электронная почта',
 'Password' => 'Пароль',
 'Login' => 'Войти',
+'NOTEBOOK' => 'ЗАПИСНАЯ КНИЖКА',
 //register
 'Back' => 'Назад',
 'Username' => 'Логин',
@@ -23,5 +24,8 @@ return [
 'Name' => 'Название Заметки',
 'YourNote' => 'Ваша Заметка',
 'Submit' => 'Создать',
+//
+'ChangePassword' => 'Сменить пароль',
+'YourProfile' => 'ЛИЧНЫЙ КАБИНЕТ',
 ];
 ?>  

@@ -1,16 +1,13 @@
 var createSaveChanges = [];
 (function (){
-  if ((window.location.pathname == '/en/products') || (window.location.pathname == '/ru/products') ){
   createSaveChanges.saveChanges = saveChanges;
 
     function saveChanges(){
       buttonSaveId.onclick = saveChange;
       async function saveChange(){
-        let response = await fetch('/en/update', {
+        let response = await fetch('update', {
           headers : {
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content//,
-            //'Content-Type':'application/json',
-            //'Accept':'application/json'
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
           },
           method: 'POST',
           body: new FormData(saveForm)
@@ -24,12 +21,11 @@ var createSaveChanges = [];
           detail     = result['detail'];    
 
           document.getElementById("inputDetailId"+id).value = detail;
-          //inputDetailId.value = result;
           textAreaId.value = document.getElementById("inputDetailId"+id).value;
 
           textAreaId.readOnly = true;
           buttonSaveId.hidden = true;
       }
   }
-}
+
 })();

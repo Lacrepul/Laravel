@@ -14,15 +14,12 @@ use App\Product;
 |
 */
 
-Route::redirect('/', '/ru');
-Route::post('/en/destroy', 'DestroyController@destroy')->name('destroy');
-//Route::resource('destroy', 'DestroyController');
+Route::redirect('/', '/ru/login');//Главная
+Route::post('destroy/{product}', 'ProductController@destroy')->name('destroy');//Удаление поста, передаю getLocale, чтобы сделать редирект на нужный язык
 
 Route::group(['prefix' => '{language}'], function (){
-    Route::resource('products','ProductController');
+    Route::resource('products','ProductController');//Работа с записями
     Auth::routes();
-    Route::get('/', 'GeneralController@showLogin');
-    Route::get('/profile', 'GeneralController@showProfile');
-    //Route::get('{products}/profile', 'GeneralController@showProfile');
-    Route::post('/update', 'GeneralController@doUpdate');
+    Route::get('/profile', 'ProfileController@showProfile');//показать профиль
+    Route::post('/update', 'ProductController@doUpdate');//Изменить пост
 });

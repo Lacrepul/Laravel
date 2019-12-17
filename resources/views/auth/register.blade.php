@@ -1,8 +1,8 @@
-@extends('products.layout')
+@extends('layout')
 
 @section('header')
     <div id="header" class="text">
-        NOTEBOOK
+        {{__('changeLang.NOTEBOOK')}}
     </div>
 @endsection
 

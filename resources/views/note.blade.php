@@ -1,4 +1,4 @@
-@extends('products.layout')
+@extends('layout')
 
 @section('logout')
     <form action="{{route('logout', app()->getLocale())}}" method="POST">
@@ -19,7 +19,7 @@
 
 @section('header')
     <div class="text" id="header">
-        NOTEBOOK
+        {{__('changeLang.NOTEBOOK')}}
     </div>
 @endsection
 
@@ -38,17 +38,12 @@
                                     <button class="btn btn-secondary" type="button" id="buttonId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName2">{{ __('changeLang.Show') }}</button>
                                     <button type="button" class="btn btn-secondary" id="buttonEditId{{$i}}" style="width: 32%;margin-top:5px;" name="buttonName">{{ __('changeLang.Edit') }}</button>
 
-                                    <!-- Немогу отправить Route с двумя параметрами для удаления, поэтому hidden inputs -->
-                                    <form action="/en/destroy" style="display: inline" method="POST">
+                                    <form action="http://127.0.0.1:8000/destroy/{{$product->id}}" style="display: inline" method="POST">
                                         @csrf
-                                        <input type="hidden" name="destroyName" value='{{$product->id}}'>
-                                        <input type="hidden" name="langName" value='{{app()->getLocale()}}'>
                                         <button type="submit" class="btn btn-secondary" style="width: 32%;margin-top:5px;">{{ __('changeLang.Delete') }}</button>
                                     </form>
 
-                                    <!--                                      -->
                                     <input type="hidden" id="inputHiddenForId{{$i}}" value="{{$product->id}}" readonly>
-                                    <!--      Нельзя спрятать JS в отдельный файл, так как используется blade                                -->
                                     
                                     <script>
                                         buttonId{{$i}}.onclick = showButt;
@@ -83,7 +78,6 @@
                         <input type="hidden" id="hiddenInput" name="hiddenInputName" value="">
                         <input type="hidden" id="inputSaveIdName" name="inputSaveIdName" value="" readonly>
                     </form>
-                
                 <button hidden class="btn btn-success btn-block" type="button" id="buttonSaveId" name="buttonSaveName">Save</button>
             </ul>
         </div>

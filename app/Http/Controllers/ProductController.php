@@ -5,41 +5,24 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use Auth;
+use App\Http\Requests\UpdatePost;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //не понятна строка
         $products = Product::latest()->paginate(100);
   
-        return view('test',compact('products'))
+        return view('note',compact('products'))
             ->with('i', 1);
-        //не понятна строка
     }
    
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        return view('products.create')
+        return view('productsOperations.create')
             ->with('user', Auth::user());
     }
   
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -48,20 +31,26 @@ class ProductController extends Controller
         ]);
   
         Product::create($request->all());
-   
-        return redirect()->route('products.index', app()->getLocale())
-                        ->with('success','Product created successfully.');
+        return redirect()->route('products.index', app()->getLocale());
     } 
-  
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    /*public function destroy(Product $product)
+
+    public function destroy(Product $product)
     {
-        $product->delete();
-        return redirect()->route('products.index', "en");
-    }*/
+        Product::destroy($product->id);
+        return back();
+    }
+
+    public function doUpdate (UpdatePost $request){
+
+        $request->validate([
+            'detail' => 'required|min:5',  
+        ]);
+
+        $id = $request['inputSaveIdName'];
+        $updatedStr = Product::find($id);
+        $updatedStr->detail = $request->detail;
+        $updatedStr->save();
+        return $request;
+    }  
+
 }

@@ -1,24 +1,14 @@
-@extends('products.layout')
+@extends('layout')
 
 @section('header')
     <div id="header" class="text">
-        NOTEBOOK
+        {{__('changeLang.NOTEBOOK')}}
     </div>
 @endsection
 
 @section('content')
-{{(app()->getLocale())}}
-<a href="/en">English</a>
-<a href="/ru">Russian</a>
-
-	<form action="{{route('logout', app()->getLocale())}}" method="POST">
-        @csrf
-		<button type="submit" class="btn btn-outline-info" style="position:fixed; width:100px;">
-			Logout
-		</button>
-    </form>
-	
-	</style>
+<a href="/en/login"><img src="/icons/EN.png"></a>
+<a href="/ru/login"><img src="/icons/RU.png"></a>
 	<div id="container" class="container">
 
 		<form action="{{ route('register', app()->getLocale()) }}">
@@ -39,13 +29,7 @@
 			</div>
 
 			<div class="form-group">
-				<input type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="{{__('changeLang.Password')}}">
-				
-				@error('password')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+				<input type="password" class="form-control" name="password" placeholder="{{__('changeLang.Password')}}">
 				
 			</div>
 			<button type="submit" class="btn btn-outline-success">{{__('changeLang.Login')}}</button>

@@ -1,4 +1,4 @@
-@extends('products.layout')
+@extends('layout')
 
 @section('logout')
     <form action="{{route('logout', app()->getLocale())}}" method="POST">
@@ -11,7 +11,7 @@
 
 @section('profileHead')
 	<div class="text" id="header">
-		Your profile
+		{{__('changeLang.YourProfile')}}
 	</div>
 @endsection
 
@@ -31,7 +31,7 @@
 				<div class="form-group">
 					<input type="email" class="form-control" value="{{$user['email']}}" name="email" placeholder="{{$user['email']}}" readonly>
 				</div>
-			<button type="submit" id="saveId" class="btn btn-outline-success">Change password</button>
+			<button type="submit" id="saveId" class="btn btn-outline-success">{{__('changeLang.ChangePassword')}}</button>
 			</form>		
 
 	</div>
