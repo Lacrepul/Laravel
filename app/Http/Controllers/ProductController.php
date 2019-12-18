@@ -6,6 +6,7 @@ use App\Product;
 use Illuminate\Http\Request;
 use Auth;
 use App\Http\Requests\UpdatePost;
+use Validator;
 
 class ProductController extends Controller
 {
@@ -40,12 +41,15 @@ class ProductController extends Controller
         return back();
     }
 
-    public function doUpdate (UpdatePost $request){
-
-        $request->validate([
-            'detail' => 'required|min:5',  
+    public function doUpdate (Request $request){
+        $v = Validator::make($request->all(), [ //Есть способ проще?
+            'detail' => 'required',  
         ]);
-
+    
+        if ($v->fails())
+        {
+            return response($v->errors(), 422);
+        }
         $id = $request['inputSaveIdName'];
         $updatedStr = Product::find($id);
         $updatedStr->detail = $request->detail;

@@ -78,6 +78,7 @@
                         <input type="hidden" id="hiddenInput" name="hiddenInputName" value="">
                         <input type="hidden" id="inputSaveIdName" name="inputSaveIdName" value="" readonly>
                     </form>
+
                 <button hidden class="btn btn-success btn-block" type="button" id="buttonSaveId" name="buttonSaveName">Save</button>
             </ul>
         </div>

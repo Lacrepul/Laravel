@@ -16,15 +16,17 @@ var createSaveChanges = [];
           let id     = 0;
           let detail = '';
           let result = await response.json();
-
-          id         = result['hiddenInputName'];    
-          detail     = result['detail'];    
-
-          document.getElementById("inputDetailId"+id).value = detail;
-          textAreaId.value = document.getElementById("inputDetailId"+id).value;
-
-          textAreaId.readOnly = true;
-          buttonSaveId.hidden = true;
+          if (response.status == 422){
+            textAreaId.value = result['detail'];
+            buttonSaveId.hidden = true;
+          }else{
+            id         = result['hiddenInputName'];    
+            detail     = result['detail'];    
+            document.getElementById("inputDetailId"+id).value = detail;
+            textAreaId.value = document.getElementById("inputDetailId"+id).value;
+            textAreaId.readOnly = true;
+            buttonSaveId.hidden = true;
+          }
       }
   }
 
